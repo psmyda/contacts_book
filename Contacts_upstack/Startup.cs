@@ -22,7 +22,10 @@ namespace Contacts_upstack
             services.AddDbContext<ContactsContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("ContactsConnection")));
 
-            services.AddMvc();
+            services.AddMvc().AddRazorPagesOptions(options =>
+            {
+                options.Conventions.AddPageRoute("/Persons/Index", "");
+            }); ;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
