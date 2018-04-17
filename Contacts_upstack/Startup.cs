@@ -22,6 +22,8 @@ namespace Contacts_upstack
             services.AddDbContext<ContactsContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("ContactsConnection")));
 
+            services.AddCors();
+
             services.AddMvc().AddRazorPagesOptions(options =>
             {
                 options.Conventions.AddPageRoute("/Persons/Index", "");
@@ -40,6 +42,9 @@ namespace Contacts_upstack
             {
                 app.UseExceptionHandler("/Error");
             }
+
+            app.UseCors(builder =>
+                builder.WithOrigins("http://localhost:4200"));
 
             app.UseStaticFiles();
 
