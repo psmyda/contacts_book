@@ -4,5 +4,24 @@
     <a routerLink="/detail/{{contact.id}}">
       <span class="badge">{{contact.id}}</span> {{contact.firstName}} {{contact.lastName}} - {{contact.phone}}
     </a>
+    <button class="delete" title="delete contact" (click)="delete(contact)">x</button>
   </li>
 </ul>
+
+<button (click)="toggleAdd()" *ngIf="!addingNew">Add new contact</button>
+<div *ngIf="addingNew">
+  <label>First name:
+    <input #contactFirstName />
+  </label>
+  <br>
+  <label>Last name:
+    <input #contactLastName />
+  </label>
+  <br>
+  <label>Phone number:
+    <input #contactPhone />
+  </label>
+  <button (click)="addNew(contactFirstName.value, contactLastName.value, contactPhone.value); contactFirstName.value=''">
+    Save
+  </button>
+</div>

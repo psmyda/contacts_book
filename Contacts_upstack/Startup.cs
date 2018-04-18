@@ -22,7 +22,7 @@ namespace Contacts_upstack
             services.AddDbContext<ContactsContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("ContactsConnection")));
 
-            services.AddCors();
+            services.AddCors(); ;
 
             services.AddMvc().AddRazorPagesOptions(options =>
             {
@@ -44,7 +44,9 @@ namespace Contacts_upstack
             }
 
             app.UseCors(builder =>
-                builder.WithOrigins("http://localhost:4200"));
+                builder.WithOrigins("http://localhost:4200")
+                .AllowAnyHeader()
+                .AllowAnyMethod());
 
             app.UseStaticFiles();
 

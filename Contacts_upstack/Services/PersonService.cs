@@ -36,7 +36,9 @@ namespace Contacts_upstack.Services
 
         public async Task<int> EditContact(Person person)
         {
-            _context.Attach(person).State = EntityState.Modified;
+            var id = person.Id;
+
+            _context.Persons.Attach(person).State = EntityState.Modified;
 
             try
             {
@@ -44,14 +46,14 @@ namespace Contacts_upstack.Services
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PersonExists(person.Id))
+                if (!PersonExists(id))
                 {
                     return 0;
                 }
                 throw;
             }
 
-            return person.Id;
+            return id;
         }
         
         public async Task DeleteContact(Person person)

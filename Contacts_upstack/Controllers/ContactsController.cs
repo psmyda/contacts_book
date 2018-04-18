@@ -31,16 +31,17 @@ namespace Contacts_upstack.Controllers
         }
 
         [HttpPost]
-        public async Task<Person> Save(Person person)
+        public async Task<Person> Save([FromBody]Person person)
         {
             var id = await _service.SaveContact(person);
 
             return await _service.GetSingleContact(id);
         }
 
-        [HttpPost("{id}")]
-        public async Task<Person> Update(int id, Person person)
+        [HttpPut]
+        public async Task<Person> Update([FromBody]Person person)
         {
+            var id = person.Id;
             await _service.EditContact(person);
 
             return await _service.GetSingleContact(id);

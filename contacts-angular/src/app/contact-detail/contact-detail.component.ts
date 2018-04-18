@@ -31,6 +31,11 @@ export class ContactDetailComponent implements OnInit {
       .subscribe(result => this.contact = result);
   }
 
+  save(): void {
+    this._contactService.updateContact(this.contact)
+      .subscribe(() => this.goBack());
+  }
+
   goBack(): void {
     this._loc.back();
   }
